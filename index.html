@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <h1>Kunden</h1>
+  <customer-app>
+    <p>{{ message }}</p>
+    <table>
+      <tr v-for="customer in customers" :key="customer.ID">
+        <td>{{ customer.Name }}</td>
+        <td>{{ customer.Email }}</td>
+        <td>{{ customer.AddressID }}</td>
+        <td>{{ customer.BillingAddressID }}</td>
+        <td><button @click=editCustomer(customer.ID)>Edit</button></td>
+        <td><button @click=deleteCustomer(customer.ID)>Delete</button></td>
+      </tr>
+      </table>  
+      <h2>Kunde</h2>
+      <customer-form>
+        <label for="name">Name:</label>
+        <input id="name" type="text" v-model="customer.Name" required>
+        <label for="email">E-Mail</label>
+        <input id="email" type="text" v-model="customer.Email" required>
+        <span></span>
+        <button @click="saveCustomer">Save</button>
+      </customer-form>
+
+      <h2>Adresse</h2>
+      <address-form>
+        <label for="street">Strasse / Nr:</label>
+        <input id="street" type="text" v-model="address.StreetNr" required>
+        <label for="city">Stadt:</label>
+        <input id="city" type="text" v-model="address.City" required>
+        <label for="zip">PLZ:</label>
+        <input id="zip" type="text" v-model="address.Zip" required>
+        <label for="country">Land:</label>
+        <select id="country" type="text" v-model="address.CountryID" required>
+          <option v-for="country in countries" :key="country.ISO" :value="country.ISO">{{ country.German }}</option>
+        </select><span></span>
+        <button @click="saveAddress">Save</button>
+      </address-form>
+  </customer-app>
+
+
+</body>
+</html>
